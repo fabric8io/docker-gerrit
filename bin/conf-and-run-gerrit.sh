@@ -13,7 +13,7 @@ if [ ! -d "$GERRIT_HOME/site" ]; then
   
   # Download Gerrit plugin
   echo ">> Download gerrit plugins - delete project <<"
-  curl -sSL http://ci.gerritforge.com/view/Plugins-stable-2.10/job/Plugin_delete-project_stable-2.10/lastSuccessfulBuild/artifact/target/delete-project-2.10.jar -o ${GERRIT_HOME}/site/plugins/delete-project.jar
+  curl -sSL https://ci.gerritforge.com/view/Plugins-stable-2.11/job/Plugin_delete-project_stable-2.11/lastSuccessfulBuild/artifact/target/delete-project-2.11.jar -o ${GERRIT_HOME}/site/plugins/delete-project.jar
 
   # Copy our config files
   cp bin/gerrit.config ${GERRIT_HOME}/site/etc/gerrit.config
