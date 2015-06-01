@@ -8,7 +8,7 @@ if [ ! -d "$GERRIT_HOME/site" ]; then
   mkdir -p site/plugins
   
   echo ">> Site doesn't exist. We will start gerrit to generate it"
-  java -jar ${GERRIT_HOME}/$GERRIT_WAR init --install-plugin=replication --batch -d ${GERRIT_HOME}/site
+  java -jar ${GERRIT_HOME}/$GERRIT_WAR init --install-plugin=replication --install-plugin=download-commands --batch -d ${GERRIT_HOME}/site
   java -jar ${GERRIT_HOME}/$GERRIT_WAR reindex -d ${GERRIT_HOME}/site
   
   # Download Gerrit plugin
