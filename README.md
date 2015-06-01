@@ -6,6 +6,12 @@ This is a [Gerrit](https://code.google.com/p/gerrit/) Docker image which runs a 
 the project improves existing available Gerrit Docker images as it support to pass as parameter the authentication mode to be ised and the env variables to be used to replicate
 the git repositories with a Git Server platform like Gogs or Gitlab.
 
+The following gerrit plugins are packaged with this image :
+
+- download-commands
+- delete-project
+- replication
+
 
 # Running this container
 
