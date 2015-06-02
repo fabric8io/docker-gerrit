@@ -7,7 +7,7 @@ if [ -f $GERRIT_SITE/.gerrit-configured ]; then
   echo ">> Gerrit has been configured, then will not generate a new setup"
 else
   echo ">> .gerrit-configured doesn't exist. We will start gerrit to generate it"
-  java -jar ${GERRIT_HOME}/$GERRIT_WAR init --install-plugin=replication --install-plugin=download-commands --batch -d ${GERRIT_SITE}
+  java -jar ${GERRIT_HOME}/$GERRIT_WAR init --install-plugin=replication --install-plugin=download-commands --batch --no-auto-start -d ${GERRIT_SITE}
   java -jar ${GERRIT_HOME}/$GERRIT_WAR reindex -d ${GERRIT_HOME}/site
 
   # Download Gerrit plugin
