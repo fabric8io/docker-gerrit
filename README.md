@@ -1,6 +1,6 @@
 # Docker Gerrit Server
 
-Gerrit version supported: [2.11](https://gerrit-documentation.storage.googleapis.com/ReleaseNotes/ReleaseNotes-2.11.html))
+Gerrit version supported: [2.11](https://gerrit-documentation.storage.googleapis.com/ReleaseNotes/ReleaseNotes-2.11.html)
 
 This is a [Gerrit](https://code.google.com/p/gerrit/) Docker image which runs a ssh & web server of the gerrit based code review system, facilitating online code reviews for projects using the Git version control system.
 the project improves existing available Gerrit Docker images as it support to pass as parameter the authentication mode to be ised and the env variables to be used to replicate
