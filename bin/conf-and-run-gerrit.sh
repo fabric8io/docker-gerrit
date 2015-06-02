@@ -10,9 +10,8 @@ else
   java -jar ${GERRIT_HOME}/$GERRIT_WAR init --install-plugin=replication --install-plugin=download-commands --batch --no-auto-start -d ${GERRIT_SITE}
   java -jar ${GERRIT_HOME}/$GERRIT_WAR reindex -d ${GERRIT_HOME}/site
 
-  # Download Gerrit plugin
-  echo ">> Download gerrit plugins - delete project <<"
-  curl -sSL https://ci.gerritforge.com/view/Plugins-stable-2.11/job/Plugin_delete-project_stable-2.11/lastSuccessfulBuild/artifact/target/delete-project-2.11.jar -o ${GERRIT_SITE}/plugins/delete-project.jar
+  # Copy plugins
+  cp ${GERRIT_HOME}/plugins/*.jar ${GERRIT_SITE}/plugins
 
   # Copy our config files
   cp bin/gerrit.config ${GERRIT_SITE}/etc/gerrit.config
@@ -29,6 +28,9 @@ else
   # Configure Gerrit
   echo ">> Configure Git"
   sed -i  's/__AUTH_TYPE__/'${AUTH_TYPE}'/g' ${GERRIT_SITE}/etc/gerrit.config
+  
+  # Regenerate the site but using now our create-admin-user plugin
+  java -jar ${GERRIT_HOME}/$GERRIT_WAR init --batch --no-auto-start -d ${GERRIT_SITE}
   
   # Add a .gerrit-configured file
   echo "Add .gerrit-configured file"

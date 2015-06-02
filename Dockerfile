@@ -30,6 +30,9 @@ ADD http://gerrit-releases.storage.googleapis.com/gerrit-${GERRIT_VERSION}.war $
 ADD ./bin ${GERRIT_HOME}/bin
 RUN chmod +x ${GERRIT_HOME}/bin/conf-and-run-gerrit.sh
 
+# Copy the plugins
+ADD ./plugins ${GERRIT_HOME}/plugins
+
 WORKDIR ${GERRIT_HOME}
 
 EXPOSE 8080 29418
