@@ -45,5 +45,9 @@ This image supports different environment variables to specifiy :
 * `GIT_SERVER_USER` user name to be used to be authenticated with the Git Http Server when replication will take place 
 * `GIT_SERVER_PASSWORD` password of the `GIT_SERVER_USER`
 * `GIT_SERVER_PROJ_ROOT` root of the web project hosting the git repositories (Default : root)
+* `GERRIT_ADMIN_USER` admin user to be created in order to log in to the gerrit http server (Default: admin)
+* `GERRIT_ADMIN_EMAIL` email address of the admin user. Could be used to send email notification during review process (Default: admin@fabric8.io)
+* `GERRIT_ADMIN_FULLNAME` full name of the Administrator (Default: Administrator)
+* `GERRIT_ADMIN_PWD` password used for http access to the web site (Default: mysecret)
 
 
