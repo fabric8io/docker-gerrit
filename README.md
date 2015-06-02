@@ -18,7 +18,15 @@ The following gerrit plugins are packaged with this image :
 To run a daemon container exposing the HTTP server with the port `8080` and the ssh daemon under the port 29418` , launch the following command within a unix terminal
 
 ```
-docker run -dP -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 -e GIT_SERVER_IP='gogs-http-service.default.local' -e GIT_SERVER_PORT='80' -e GIT_SERVER_USER=root -e GIT_SERVER_PASSWORD=redhat01 -e GIT_SERVER_PROJ_ROOT=root -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' -v /home/gerrit-site:/home/gerrit/site --name gerrit-server fabric8/gerrit
+docker run -dP -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 |
+       -e GIT_SERVER_IP='gogs-http-service.default.local' \
+       -e GIT_SERVER_PORT='80' \
+       -e GIT_SERVER_USER=root \
+       -e GIT_SERVER_PASSWORD=redhat01 \
+       -e GIT_SERVER_PROJ_ROOT=root \
+       -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' \
+       -v /home/gerrit-site:/home/gerrit/site \
+       --name gerrit-server fabric8/gerrit
 ```
 
 Remark : When the container is created, we mount/map the volume of the host `/home/gerrit-site` to this volume of the docker container `/home/gerrit/site` in order to restore previously configured configurations (database, etc files, ...). The name of the docker container volume can't be changed.
