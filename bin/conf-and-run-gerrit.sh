@@ -32,6 +32,9 @@ else
   # Regenerate the site but using now our create-admin-user plugin
   java -jar ${GERRIT_HOME}/$GERRIT_WAR init --batch --no-auto-start -d ${GERRIT_SITE}
   
+  # Copy our gerrit.sh script
+  cp bin/gerrit.sh ${GERRIT_SITE}/bin/gerrit.sh
+  
   # Add a .gerrit-configured file
   echo "Add .gerrit-configured file"
   touch $GERRIT_SITE/.gerrit-configured
@@ -58,5 +61,8 @@ chown -R gerrit:gerrit $GERRIT_HOME
 # docker run -it -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 --name my-gerrit cmoulliard/gerrit:1.0 bash
 # bash -x ${GERRIT_SITE}/bin/gerrit.sh start
 
-echo "Gerrit started using the java cmd : java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}"
-exec java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}
+echo "Gerrit started"
+# 'using cmd : java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}'
+# exec java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}
+# service supervisor start
+${GERRIT_SITE}/bin/gerrit.sh start
