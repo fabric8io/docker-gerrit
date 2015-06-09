@@ -45,8 +45,6 @@
 #   If set to "0" disables using start-stop-daemon.  This may need to
 #   be set on SuSE systems.
 
-set -x
-
 usage() {
     me=`basename "$0"`
     echo >&2 "Usage: $me {start|stop|restart|check|status|run|supervise|threads} [-d site]"

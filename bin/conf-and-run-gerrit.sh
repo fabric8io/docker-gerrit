@@ -57,12 +57,9 @@ chown -R gerrit:gerrit $GERRIT_HOME
 # /home/gerrit/site/bin/gerrit.sh: line 429: echo: write error: Permission denied
 # ${GERRIT_SITE}/bin/gerrit.sh start
 # 
-# To debug it, run this command after starting the container intereactive mode
+# To debug it, run this command after starting the container in interactive mode
 # docker run -it -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 --name my-gerrit cmoulliard/gerrit:1.0 bash
 # bash -x ${GERRIT_SITE}/bin/gerrit.sh start
 
-echo "Gerrit started"
-# 'using cmd : java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}'
-# exec java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}
-# service supervisor start
-${GERRIT_SITE}/bin/gerrit.sh start
+echo "Gerrit started : java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}"
+exec java -jar ${GERRIT_WAR} daemon --console-log -d ${GERRIT_SITE}

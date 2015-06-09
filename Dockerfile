@@ -15,8 +15,9 @@ RUN \
   DEBIAN_FRONTEND=noninteractive apt-get -y upgrade && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y sudo vim-tiny git && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jre-headless && \
-  DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y curl
+  
+# DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor && \
 
 # Add user gerrit & group like also gerrit to sudo to allow the gerrit user to issue a sudo cmd
 RUN groupadd $GERRIT_USER && \
