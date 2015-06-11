@@ -11,14 +11,14 @@ The following gerrit plugins are packaged with this image :
 - download-commands
 - delete-project
 - replication
-- create-user-plugin (This plugin will add new users to the database created by Gerrit during the creation of the site. The users to be created can be created using a Gerrit ENV VAR : GERRIT_USERS_ACCOUNT)
+- create-user-plugin. This plugin will add new users to the database created by Gerrit during the creation of the site. The users to be created can be created using a Gerrit ENV VAR : GERRIT_USERS_ACCOUNT
 
-Remark: When the Gerrit SSHD & HTTP Servers will be laucnhed by the Docker container, we will also launch a Java job in charge to update the permissions of the project using the procedure described here () but implemented
-using the Eclipse JGit API. In order to allow the job to run, the private / public keys to be used by the gerrit admin user and also the Root User account must be mounted using Docker volume.
+Remark: When the Gerrit SSHD & HTTP Servers will be launched by the Docker container, we will also launch a Java job in charge to update the permissions of the project using the procedure described here ((http://blog.bruin.sg/2013/04/how-to-edit-the-project-config-for-all-projects-in-gerrit/) but implemented
+using the Eclipse JGit API. In order to allow the job to run, the private / public keys to be used by the gerrit admin user and also the Root User account must be mounted using Docker volumes.
 
 # Running this container
 
-To run a daemon container exposing the HTTP server with the port `8080` and the ssh daemon under the port 29418` , launch the following command within a unix terminal
+To run a daemon container exposing the HTTP server with the port `8080` and the ssh daemon under the port `29418`, launch the following command within a unix terminal
 
 ```
 docker run -dP -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 |
