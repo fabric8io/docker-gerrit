@@ -29,8 +29,8 @@ docker run -d -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' \
  -v $ADMIN_HOME_KEY/id_rsa.pub:/root/.ssh/id_rsa.pub \
  -v $ADMIN_HOME_KEY/id_rsa:/root/.ssh/id_rsa \
- -v $USER_HOME_KEYS:/home/gerrit/ssh-keys \
+ -v $USERS_HOME_KEYS:/home/gerrit/ssh-keys \
  -v $GERRIT_TEMP_DIR:/home/gerrit/site \
  --name gerrit-server cmoulliard/gerrit
  
- docker exec -it gerrit-server bash
+docker exec -it gerrit-server bash
