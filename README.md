@@ -3,31 +3,30 @@
 Gerrit version supported: [2.11](https://gerrit-documentation.storage.googleapis.com/ReleaseNotes/ReleaseNotes-2.11.html)
 
 This is a [Gerrit](https://code.google.com/p/gerrit/) Docker image which runs a ssh & web server of the gerrit based code review system, facilitating online code reviews for projects using the Git version control system.
-the project improves existing available Gerrit Docker images as it support to pass as parameter the authentication mode, the env variables to be used to replicate
-the git repositories with a Git Server platform like Gogs or Gitlab.
+
+This project improves the existing available Gerrit Docker images as it supports to pass as parameters the authentication mode, the env variables to be used to replicate the git repositories with a Git Server platform like Gogs or Gitlab and many more.
 
 The following gerrit plugins are packaged with this image :
 
-- download-commands
-- delete-project
-- replication
+- download-commands (gerrit project)
+- delete-project (gerrit project)
+- replication (gerrit project)
 - create-user-plugin. 
 
-The `create-user-plugin` has been created specifically for the Continous Delivery Scenario of Fabric8 and is not yet integrated within the Gerrit Project (https://github.com/cmoulliard/gerrit-create-adminuser-plugin/blob/master/create-users/src/main/java/com/googlesource/gerrit/plugins/AddUser.java).
-It goal is to add new users to the database created by Gerrit during the generation of the site.
+The [`create-user-plugin`](https://github.com/cmoulliard/gerrit-create-adminuser-plugin/blob/master/create-users/src/main/java/com/googlesource/gerrit/plugins/AddUser.java) has been created specifically for the Continous Delivery Scenario of Fabric8 and is not yet integrated within the Gerrit Project.
+It goal is to add new users (jenkins, sonar, ...) to the database created by Gerrit during the generation of the site.
 The users to be created can be added using a Gerrit env variale `GERRIT_ACCOUNTS` using this convention :
 
 ```
 GERRIT_ACCOUNTS='user1,fullname1,email1,pwd1,group1:group2:...;user2,fullname2,email2,pwd2,group1:group2:...;...'
 
 Example : -e GERRIT_ACCOUNTS='jenkins,jenkins,jenkins@fabric8.io,secret,Non-Interactive Users:Administrators;sonar,sonar,sonar@fabric8.io,secret,Non-Interactive Users'
-
 ```
 
 Remark : The Gerrit groups that you can use are : 'Non-Interactive Users','Administrators'
 
 The volume of the folder containing the public keys of the users must be mounted and the value of the volume 
-passed as env var to gerrit ("GERRIT_SSH_PATH").
+passed as an env variable to the docker container ("GERRIT_SSH_PATH").
 
 The `create-user-plugin` uses these env variables :
 
@@ -41,8 +40,12 @@ The `create-user-plugin` uses these env variables :
        -v /admin_user/home/.ssh/id_rsa:/root/.ssh/id_rsa \
        -v /accounts/ssh-keys/:/home/gerrit/ssh-keys \  
 
-When the Gerrit SSHD & HTTP Servers will be started by the Docker container, we will also launch a Java job in charge to update the permissions of the project using the procedure described here ((http://blog.bruin.sg/2013/04/how-to-edit-the-project-config-for-all-projects-in-gerrit/) but implemented
-using the Eclipse JGit API. Like the previous plugin, this java job has not yet [published into the gerrit google project](https://github.com/cmoulliard/gerrit-create-adminuser-plugin/blob/master/change-project-config/src/main/java/io/fabric8/docker/gerrit/ChangeProjectConfig.java#L23-22). In order to allow the job to run, the private / public keys to be used by the gerrit admin user and also the Root User account must be mounted using Docker volumes.
+When the Gerrit SSHD & HTTP Servers will be started by the Docker container, we will also start a Java job in charge to update the permissions of the project using the procedure described here ((http://blog.bruin.sg/2013/04/how-to-edit-the-project-config-for-all-projects-in-gerrit/) but implemented
+using the Eclipse JGit API.
+
+Like the previous plugin, this java job has not yet been [published into the gerrit google project](https://github.com/cmoulliard/gerrit-create-adminuser-plugin/blob/master/change-project-config/src/main/java/io/fabric8/docker/gerrit/ChangeProjectConfig.java#L23-22).
+
+In order to allow the job to run, the private / public keys to be used by the gerrit admin user and also the Root User account must be mounted using Docker volumes.
 
 The java job uses the following env variables :
 
