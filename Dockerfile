@@ -28,7 +28,9 @@ RUN mkdir ${GERRIT_HOME}
 # Download Gerrit
 ADD http://gerrit-releases.storage.googleapis.com/gerrit-${GERRIT_VERSION}.war ${GERRIT_HOME}/${GERRIT_WAR}
 
-# Copy the files to bin folder
+# Copy the files to bin, config & job folders
+ADD ./git/project-config ${GERRIT_HOME}/config
+ADD ./job ${GERRIT_HOME}/job
 ADD ./bin ${GERRIT_HOME}/bin
 RUN chmod +x ${GERRIT_HOME}/bin/conf-and-run-gerrit.sh
 

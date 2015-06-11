@@ -61,5 +61,8 @@ chown -R gerrit:gerrit $GERRIT_HOME
 # docker run -it -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 --name my-gerrit cmoulliard/gerrit:1.0 bash
 # bash -x ${GERRIT_SITE}/bin/gerrit.sh start
 
-echo "Gerrit started : java -jar ${GERRIT_WAR} daemon -d ${GERRIT_SITE}"
+echo "Launching job to update Project Config. It will wait till a connection can be established with the SSHD of Gerrit"
+exec java -jar ./job/change-project-config-1.0.jar &
+
+echo "Starting Gerrit ... "
 exec java -jar ${GERRIT_WAR} daemon --console-log -d ${GERRIT_SITE}
