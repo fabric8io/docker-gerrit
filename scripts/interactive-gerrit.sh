@@ -2,7 +2,7 @@
 
 USER=$1
 GERRIT_TEMP_DIR=$2
-USER_HOME=$3
+USER_HOME_KEYS=$3
 
 docker stop gerrit-server
 docker rm gerrit-server
@@ -24,7 +24,7 @@ docker run -it -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -e GIT_SERVER_PASSWORD='redhat01' \
  -e GIT_SERVER_PROJ_ROOT='root'  \
  -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' \
- -v $USER_HOME/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
- -v $USER_HOME/.ssh/id_rsa:/root/.ssh/id_rsa \
+ -v $USER_HOME_KEYS/id_rsa.pub:/root/.ssh/id_rsa.pub \
+ -v $USER_HOME_KEYS/id_rsa:/root/.ssh/id_rsa \
  -v $GERRIT_TEMP_DIR:/home/gerrit/site \
  --name gerrit-server cmoulliard/gerrit bash
