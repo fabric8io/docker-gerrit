@@ -13,9 +13,9 @@ docker build -t $USER/gerrit .
 
 docker run -it -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -e GERRIT_GIT_LOCALPATH='/home/gerrit/git' \
- -e GERRIT_GIT_PROJECT_CONFIG='/home/gerrit/config/project.config' \
+ -e GERRIT_GIT_PROJECT_CONFIG='/home/gerrit/configs/project.config' \
  -e GERRIT_GIT_REMOTEPATH='ssh://admin@localhost:29418/All-Projects' \
- -e GIT_SERVER_IP='gogs-http-service.default.local' \
+ -e GIT_SERVER_IP='gogs-service.default.local' \
  -e GIT_SERVER_PORT='80' \
  -e GIT_SERVER_USER='root'  \
  -e GIT_SERVER_PASSWORD='redhat01' \

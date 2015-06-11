@@ -14,8 +14,8 @@ else
   cp ${GERRIT_HOME}/plugins/*.jar ${GERRIT_SITE}/plugins
 
   # Copy our config files
-  cp bin/gerrit.config ${GERRIT_SITE}/etc/gerrit.config
-  cp bin/replication.config ${GERRIT_SITE}/etc/replication.config
+  cp configs/gerrit.config ${GERRIT_SITE}/etc/gerrit.config
+  cp configs/replication.config ${GERRIT_SITE}/etc/replication.config
   
   # Configure Git Replication
   echo ">> Configure Git Replication"
@@ -41,12 +41,6 @@ else
  
 fi
 
-# Debug purpose
-# ls -la $GERRIT_HOME/SITE/db
-# ls -la $GERRIT_HOME/site/etc
-# cat /home/gerrit/site/etc/replication.config
-# cat /home/gerrit/site/etc/gerrit.config
-
 # Start gerrit
 
 # Reset the gerrit_war variable as the path must be defined to the /home/gerrit/ directory
@@ -54,12 +48,9 @@ export GERRIT_WAR=${GERRIT_HOME}/gerrit.war
 chown -R gerrit:gerrit $GERRIT_HOME
 
 # Error reported when we launch gerrit with the bash script
-# /home/gerrit/site/bin/gerrit.sh: line 429: echo: write error: Permission denied
+# /home/gerrit/site/bin/gerrit.sh: line 429: echo: write I/O error: Permission denied - this problem is related to the fact 
+# that oom killer is not supported by Docker
 # ${GERRIT_SITE}/bin/gerrit.sh start
-# 
-# To debug it, run this command after starting the container in interactive mode
-# docker run -it -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 --name my-gerrit cmoulliard/gerrit:1.0 bash
-# bash -x ${GERRIT_SITE}/bin/gerrit.sh start
 
 echo "Launching job to update Project Config. It will wait till a connection can be established with the SSHD of Gerrit"
 exec java -jar ./job/change-project-config-1.0.jar &
