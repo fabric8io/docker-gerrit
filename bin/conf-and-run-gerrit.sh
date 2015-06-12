@@ -18,7 +18,7 @@ else
   cp configs/replication.config ${GERRIT_SITE}/etc/replication.config
   
   # Configure Git Replication
-  echo ">> Configure Git Replication"
+  echo ">> Configure Git Replication & replace variables : GIT_SERVER_IP, GIT_SERVER_PORT, GIT_SERVER_USER, GIT_SERVER_PASSWORD & GIT_SERVER_PROJ_ROOT"
   sed -i  's/__GIT_SERVER_IP__/'${GIT_SERVER_IP}'/g' ${GERRIT_SITE}/etc/replication.config
   sed -i  's/__GIT_SERVER_PORT__/'${GIT_SERVER_PORT}'/g' ${GERRIT_SITE}/etc/replication.config
   sed -i  's/__GIT_SERVER_USER__/'${GIT_SERVER_USER}'/g' ${GERRIT_SITE}/etc/replication.config
@@ -26,14 +26,11 @@ else
   sed -i  's/__GIT_SERVER_PROJ_ROOT__/'${GIT_SERVER_PROJ_ROOT}'/g' ${GERRIT_SITE}/etc/replication.config
 
   # Configure Gerrit
-  echo ">> Configure Git"
+  echo ">> Configure Git Config and change AUTH_TYPE"
   sed -i  's/__AUTH_TYPE__/'${AUTH_TYPE}'/g' ${GERRIT_SITE}/etc/gerrit.config
   
   # Regenerate the site but using now our create-admin-user plugin
   java -jar ${GERRIT_HOME}/$GERRIT_WAR init --batch --no-auto-start -d ${GERRIT_SITE}
-  
-  # Copy our gerrit.sh script
-  cp bin/gerrit.sh ${GERRIT_SITE}/bin/gerrit.sh
   
   # Add a .gerrit-configured file
   echo "Add .gerrit-configured file"
@@ -41,16 +38,9 @@ else
  
 fi
 
-# Start gerrit
-
 # Reset the gerrit_war variable as the path must be defined to the /home/gerrit/ directory
 export GERRIT_WAR=${GERRIT_HOME}/gerrit.war
 chown -R gerrit:gerrit $GERRIT_HOME
-
-# Error reported when we launch gerrit with the bash script
-# /home/gerrit/site/bin/gerrit.sh: line 429: echo: write I/O error: Permission denied - this problem is related to the fact 
-# that oom killer is not supported by Docker
-# ${GERRIT_SITE}/bin/gerrit.sh start
 
 echo "Launching job to update Project Config. It will wait till a connection can be established with the SSHD of Gerrit"
 exec java -jar ./job/change-project-config-1.0.jar &

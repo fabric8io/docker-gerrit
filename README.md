@@ -127,4 +127,17 @@ This image requires that we pass mount different volumes :
 * Host Gerrit Site generated Volume (backup) : Container Gerrit Site Volume (Example : -v /home/gerrit-site:/home/gerrit/site)
 * Host Users/Accounts Public Volume : Container Gerrit SSh-Keys of the accounts (Example : -v /home/accounts/ssh-keys/:/home/gerrit/ssh-keys) 
 
+## Build Docker image and test it
+
+The docker image can be built using pre-defined keys part of that project (located under the folder ssh-keys/admin and ssh-keys/users) and a docker container started. 
+For that purpose, use the bash script `/scripts/daemon-interactive` and pass as parameter; the name of the image, your local temp directory hosting the gerrit site generated,
+the location of the admin ssh keys (private and public) and the location of the users ssh public key
+
+Example :
+
+```
+./scripts/daemon-gerrit.sh cmoulliard /Users/chmoulli/Temp/gerrit-site ssh-keys/admin ssh-keys/users
+
+```
+
 

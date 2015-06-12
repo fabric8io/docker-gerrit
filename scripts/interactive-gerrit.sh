@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+PROJECT_DIR=`pwd`
+
 USER=$1
 GERRIT_TEMP_DIR=$2
-ADMIN_HOME_KEY=$3
-USERS_HOME_KEYS=$4
+ADMIN_HOME_KEY=PROJECT_DIR/$3
+USERS_HOME_KEY=PROJECT_DIR/$4
 
-docker stop gerrit-server
-docker rm gerrit-server
+docker stop gerrit
+docker rm gerrit
 rm -rf $GERRIT_TEMP_DIR
 
 docker build -t $USER/gerrit .
@@ -29,6 +31,6 @@ docker run -it -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' \
  -v $ADMIN_HOME_KEY/id_rsa.pub:/root/.ssh/id_rsa.pub \
  -v $ADMIN_HOME_KEY/id_rsa:/root/.ssh/id_rsa \
- -v $USERS_HOME_KEYS:/home/gerrit/ssh-keys \
+ -v $USERS_HOME_KEY:/home/gerrit/ssh-keys \
  -v $GERRIT_TEMP_DIR:/home/gerrit/site \
- --name gerrit-server cmoulliard/gerrit bash
+ --name gerrit cmoulliard/gerrit bash
