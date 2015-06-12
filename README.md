@@ -114,7 +114,6 @@ This image supports different environment variables to specifiy :
       
 * `AUTH_TYPE` : the authentication mode to use to authenticate the incoming user (Default : OpenID, Values : OpenID, DEVELOPMENT_BECOME_ANY_ACCOUNT, HTTP, LDAP, OAUTH, ...) - See [doc](https://gerrit-documentation.storage.googleapis.com/Documentation/2.11/config-gerrit.html#auth) for more info
 
-
 # Volumes
 
 This image requires that we pass mount different volumes :
@@ -130,8 +129,8 @@ This image requires that we pass mount different volumes :
 ## Build Docker image and test it
 
 The docker image can be built using pre-defined keys part of that project (located under the folder ssh-keys/admin and ssh-keys/users) and a docker container started. 
-For that purpose, use the bash script `/scripts/daemon-interactive` and pass as parameter; the name of the image, your local temp directory hosting the gerrit site generated,
-the location of the admin ssh keys (private and public) and the location of the users ssh public key
+
+For that purpose, use the bash script `/scripts/daemon-interactive` and pass as parameter; the name of the image, your local temp directory hosting the gerrit site generated, the location of the admin ssh keys (private and public) and the location of the users ssh public key
 
 Example :
 
