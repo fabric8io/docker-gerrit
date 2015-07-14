@@ -81,10 +81,8 @@ docker run -dP -p 0.0.0.0:8080:8080 -p 127.0.0.1:29418:29418 \
        -e GERRIT_ADMIN_PWD='mysecret' \
        -e GERRIT_ACCOUNTS='jenkins,jenkins,jenkins@fabric8.io,secret,Non-Interactive Users:Administrators;sonar,sonar,sonar@fabric8.io,secret,Non-Interactive Users' \
        -e GERRIT_PUBLIC_KEYS_PATH='/VolumeMounted/ssh-keys' \
-       -e GERRIT_ADMIN_PRIVATE_KEY='/VolumeMounted/private-keys' \
+       -e GERRIT_ADMIN_PRIVATE_KEY='/VolumeMounted/ssh-keys/id_rsa' \
        -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' \
-       -v /admin_user/home/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub \
-       -v /admin_user/home/.ssh/id_rsa:/root/.ssh/id_rsa \
        -v /accounts/ssh-keys/:/home/gerrit/ssh-keys \       
        -v /home/gerrit-site:/home/gerrit/site \
        --name gerrit-server fabric8/gerrit
@@ -125,6 +123,8 @@ This image supports different environment variables to specifiy :
     `'jenkins,jenkins,jenkins@fabric8.io,secret,Non-Interactive Users:Administrators;sonar,sonar,sonar@fabric8.io,secret,Non-Interactive Users'`
     the format of the string is `<user_id><full_name><email><password><roles/groups>`
 - `GERRIT_PUBLIC_KEYS_PATH` - the location/path on disk for where the admin and any users (if applicable, pass as GERRIT_ACCOUNTS described above) public keys should be found. By default, public keys will be matched by this convention `id_`user_id`_rsa.pub`
+- `GERRIT_USER_PUBLIC_KEY_PREFIX` - you can change the default prefix of the public keys which is `id_`
+- `GERRIT_USER_PUBLIC_KEY_SUFFIX` - you can change the default suffix of the public keys which is `_rsa.pub`
          
 4) Authentication mode
       
