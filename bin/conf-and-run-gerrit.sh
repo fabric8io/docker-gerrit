@@ -43,7 +43,7 @@ export GERRIT_WAR=${GERRIT_HOME}/gerrit.war
 chown -R gerrit:gerrit $GERRIT_HOME
 
 echo "Launching job to update Project Config. It will wait till a connection can be established with the SSHD of Gerrit"
-exec java -jar ./job/change-project-config-2.11.1.jar &
+exec java -jar ./job/change-project-config-2.11.2.jar &
 
 echo "Starting Gerrit ... "
 exec java -jar ${GERRIT_WAR} daemon --console-log -d ${GERRIT_SITE}
