@@ -7,7 +7,7 @@ When the container is created, we mount/map the volume of the host `/home/gerrit
 
 ## Functionality
 
-This is a [Gerrit](https://code.google.com/p/gerrit/) Docker image which can be used to facilitate online code reviews for projects using the Git version control system.
+This is a [Gerrit](https://code.google.com/p/gerrit/) docker image which can be used to facilitate online code reviews for projects using the Git version control system.
 
 This project improves the existing available Gerrit Docker images as it allows you to control the authentication options (default is OpenID) as well as enable replication to git hosting sites like Github, GitLab, or Gogs. Additionally, you can automatically create users and assign public keys using this image and passing in environment variables
  
