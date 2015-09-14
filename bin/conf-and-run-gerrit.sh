@@ -42,6 +42,9 @@ fi
 export GERRIT_WAR=${GERRIT_HOME}/gerrit.war
 chown -R gerrit:gerrit $GERRIT_HOME
 
+# lets make sure that the ssh keys have their permissions setup correctly
+chmod 400 /root/.ssh/*
+
 echo "Launching job to update Project Config. It will wait till a connection can be established with the SSHD of Gerrit"
 exec java -jar ./job/change-project-config-2.11.2.jar &
 
