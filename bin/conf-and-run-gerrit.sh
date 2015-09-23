@@ -7,18 +7,20 @@ set -e
 # This step is required as gerrit, when the admin user is created, at the startup of the gerrit server, will
 # import the key using this path ${home_dir}/.ssh/id_rsa
 FILES='/root/.ssh/*'
-for f in $FILES
- do 
-   echo "File to be processed $f"
-   mv $filename ${filename//ssh-key/id_rsa}
-   # mv "$f" "$(echo $f | sed -e 's/-/_/g')"
+for f in $FILES; do
+   file=$(basename $f)
+   DIR=$(dirname $f)
+   #if [[ ! "$file" =~ ^id_rsa*|^id_rsa.pub* ]]; then
+   if [[  "$file" =~ ^ssh-key* ]]; then
+      new=$(echo $file | sed -e 's/ssh-key/id_rsa/')
+      echo "!! SSH-KEY : -> " mv "$DIR/$file" "$DIR/$new"
+      sudo mv "$DIR/$file" "$DIR/$new"
+   fi
 done
-
 
 # lets make sure that the ssh keys have their permissions setup correctly
 chmod 700 /root/.ssh
 chmod 400 /root/.ssh/*
-
 
 # Initialize gerrit & reindex the site if the gerrit-configured doesn't exist
 if [ -f $GERRIT_SITE/.gerrit-configured ]; then

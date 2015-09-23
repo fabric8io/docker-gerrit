@@ -170,4 +170,20 @@ One last thing to point out; with Kubernetes we can use [secret volumes](https:/
 - `GERRIT_USER_PUBLIC_KEY_PREFIX` - you can change the default prefix of the public keys which is `id_`
 - `GERRIT_USER_PUBLIC_KEY_SUFFIX` - you can change the default suffix of the public keys which is `_rsa.pub`
 
+### Instructions
+
+To build the image and test it, open a terminal under the project cloned or download form the github repo and run this script command
+The script accepts 2 parameters : username, localation of the gerrit_site on your local machine
+
+```
+./scripts/daemon-gerrit.sh cmoulliard /home/temp/gerrit-site
+```
+
+When the server is started, you can test the connection with the http server `http://192.168.59.103:8080` or using ssh
+
+```
+ssh -i /Users/chmoulli/Fuse/Fuse-projects/fabric8/docker-gerrit/ssh-keys/id_rsa -p 2948 admin@192.168.59.103
+```
+
+The IP address could be different depending where your docker server is running (boot2docker, ...)
 
