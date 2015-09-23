@@ -47,7 +47,9 @@ else
   echo ">> Configure Git Config and change AUTH_TYPE"
   sed -i  's/__AUTH_TYPE__/'${AUTH_TYPE}'/g' ${GERRIT_SITE}/etc/gerrit.config
   
-  # Regenerate the site but using now our create-admin-user plugin
+  # Regenerate the site but using now our add-user-plugin to import the users and their keys including also
+  # the ssh public key for the admin user. Without the admin public key, it is not possible to ssh to the gerrit server
+  # or to use the change-project-config plugin which issue a ssh command through the git client
   java -jar ${GERRIT_HOME}/$GERRIT_WAR init --batch --no-auto-start -d ${GERRIT_SITE}
   
   # Add a .gerrit-configured file
