@@ -2,14 +2,16 @@
 
 set -e
 
-# Rename keys imported by replacing "-" char with "_" char
+# Rename keys imported within the root directory
+# Replace "-" char with "_" char
 # This step is required as gerrit, when the admin user is created, at the startup of the gerrit server, will
 # import the key using this path ${home_dir}/.ssh/id_rsa
 FILES='/root/.ssh/*'
 for f in $FILES
  do 
    echo "File to be processed $f"
-   mv "$f" "$(echo $f | sed -e 's/-/_/g')"
+   mv $filename ${filename//ssh-key/id_rsa}
+   # mv "$f" "$(echo $f | sed -e 's/-/_/g')"
 done
 
 
