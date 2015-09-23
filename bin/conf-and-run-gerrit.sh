@@ -2,6 +2,22 @@
 
 set -e
 
+# Rename keys imported by replacing "-" char with "_" char
+# This step is required as gerrit, when the admin user is created, at the startup of the gerrit server, will
+# import the key using this path ${home_dir}/.ssh/id_rsa
+FILES='/root/.ssh/*'
+for f in $FILES
+ do 
+   echo "File to be processed $f"
+   mv "$f" "$(echo $f | sed -e 's/-/_/g')"
+done
+
+
+# lets make sure that the ssh keys have their permissions setup correctly
+chmod 700 /root/.ssh
+chmod 400 /root/.ssh/*
+
+
 # Initialize gerrit & reindex the site if the gerrit-configured doesn't exist
 if [ -f $GERRIT_SITE/.gerrit-configured ]; then
   echo ">> Gerrit has been configured, then will not generate a new setup"
@@ -41,10 +57,6 @@ fi
 # Reset the gerrit_war variable as the path must be defined to the /home/gerrit/ directory
 export GERRIT_WAR=${GERRIT_HOME}/gerrit.war
 chown -R gerrit:gerrit $GERRIT_HOME
-
-# lets make sure that the ssh keys have their permissions setup correctly
-chmod 700 /root/.ssh
-chmod 400 /root/.ssh/*
 
 echo "Launching job to update Project Config. It will wait till a connection can be established with the SSHD of Gerrit"
 exec java -jar ./job/change-project-config-2.11.2.jar &
