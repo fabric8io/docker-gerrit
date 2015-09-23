@@ -28,7 +28,7 @@ else
   java -jar ${GERRIT_HOME}/$GERRIT_WAR init --install-plugin=replication --install-plugin=download-commands --batch --no-auto-start -d ${GERRIT_SITE}
   java -jar ${GERRIT_HOME}/$GERRIT_WAR reindex -d ${GERRIT_HOME}/site
 
-  # Copy plugins
+  # Copy plugins including : add-user-plugin, delete-project
   cp ${GERRIT_HOME}/plugins/*.jar ${GERRIT_SITE}/plugins
 
   # Copy our config files
