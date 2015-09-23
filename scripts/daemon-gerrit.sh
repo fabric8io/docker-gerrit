@@ -5,6 +5,7 @@ PROJECT_DIR=`pwd`
 USER=${1:-cmoulliard} # Username to be used to create the image
 GERRIT_TEMP_DIR=${2:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
 KEYS_DIR=$PROJECT_DIR/ssh-keys
+ADMIN_KEY=$PROJECT_DIR/ssh-admin-key
 
 docker stop gerrit
 docker rm gerrit
@@ -32,7 +33,7 @@ docker run -d -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -e GERRIT_USER_PUBLIC_KEY_PREFIX='id_' \
  -e GERRIT_USER_PUBLIC_KEY_SUFFIX='_rsa.pub' \
  -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' \
- -v $KEYS_DIR/ssh-key:/root/.ssh/ssh-key \
+ -v $ADMIN_KEY:/root/.ssh \
  -v $KEYS_DIR:/home/gerrit/ssh-keys \
  -v $GERRIT_TEMP_DIR:/home/gerrit/site \
  --name gerrit \
