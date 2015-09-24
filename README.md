@@ -173,10 +173,10 @@ One last thing to point out; with Kubernetes we can use [secret volumes](https:/
 ### Instructions
 
 To build the image and test it, open a terminal under the project cloned or download form the github repo and run this script command
-The script accepts 2 parameters : username, localation of the gerrit_site on your local machine
+The script accepts 2 parameters : username, localation of the gerrit_site on your local machine and the IP Address of the Docker Host
 
 ```
-./scripts/daemon-gerrit.sh cmoulliard /home/temp/gerrit-site
+./scripts/daemon-gerrit.sh cmoulliard /home/temp/gerrit-site HOSTNAME_IPADDRESS_DOCKER
 ```
 
 When the server is started, you can test the connection with the http server `http://192.168.59.103:8080` or using ssh
