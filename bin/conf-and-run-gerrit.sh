@@ -6,8 +6,8 @@ set -e
 # Replace "-" char with "_" char
 # This step is required as gerrit, when the admin user is created, at the startup of the gerrit server, will
 # import the key using this path ${home_dir}/.ssh/id_rsa
-FILES='/root/.ssh/*'
-for f in $FILES; do
+for f in $GERRIT_SSH_PATH/*; do
+   echo $f
    file=$(basename $f)
    DIR=$(dirname $f)
    if [[ "$file" =~ ^ssh-key* ]]; then
