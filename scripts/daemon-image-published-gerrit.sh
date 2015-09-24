@@ -2,13 +2,24 @@
 
 #
 # This script uses the Docker Tools Box (= new packaging of boot2docker) to start the docker daemon
+# with these env variables : 
+# DOCKER_CERT_PATH="/Users/chmoulli/.docker/machine/machines/default"
+# DOCKER_HOST="tcp://$DOCKER_IP_PORT"
+# DOCKER_MACHINE_NAME="default"
+# DOCKER_TLS_VERIFY="1"
+#
+# You can change IP_ADDRESS and PORT NUMBER to access the docker daemaon as such
+# ./scripts/daemon-image-published-gerrit.sh 192.168.99.100:2376
+# 
+# like also the local directory containing the gerrit-site created and mounted as volume
+#
+# ./scripts/daemon-image-published-gerrit.sh 192.168.99.100:2376 /home/temp/gerrit-site
 #
 
 PROJECT_DIR=`pwd`
 
-USER=${1:-cmoulliard} # Username to be used to create the image
+DOCKER_IP_PORT=${1:-192.168.99.100:2376}
 GERRIT_TEMP_DIR=${2:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
-DOCKER_IP_PORT=${3:-192.168.99.100:2376}
 KEYS_DIR=$PROJECT_DIR/ssh-keys
 ADMIN_KEY=$PROJECT_DIR/ssh-admin-key
 
