@@ -4,3 +4,6 @@ target
 .classpath
 .project
 .settings
+
+ssh-admin-key/
+ssh-keys/
