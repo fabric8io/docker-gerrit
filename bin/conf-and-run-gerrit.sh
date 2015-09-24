@@ -16,6 +16,11 @@ for f in $GERRIT_SSH_PATH/*; do
       echo $DIR/$new
       cp $DIR/$new $GERRIT_PUBLIC_KEYS_PATH/id-admin-rsa.pub
    fi
+   
+   if [ "$new" = "id_rsa" ]; then
+      echo $DIR/$new
+      cp $DIR/$new $GERRIT_PUBLIC_KEYS_PATH/id-admin-rsa
+   fi
 done
 
 # lets make sure that the ssh keys have their permissions setup correctly
@@ -65,7 +70,7 @@ export GERRIT_WAR=${GERRIT_HOME}/gerrit.war
 chown -R gerrit:gerrit $GERRIT_HOME
 
 echo "Launching job to update Project Config. It will wait till a connection can be established with the SSHD of Gerrit"
-exec java -jar ${GERRIT_HOME}/job/change-project-config-2.11.2.jar &
+exec java -jar ${GERRIT_HOME}/job/change-project-config-2.11.3.jar &
 
 echo "Starting Gerrit ... "
 exec java -jar ${GERRIT_WAR} daemon --console-log -d ${GERRIT_SITE}

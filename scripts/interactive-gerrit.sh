@@ -32,8 +32,8 @@ docker run -it -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -e GERRIT_SSH_PATH='/root/.ssh' \
  -e GERRIT_ADMIN_PRIVATE_KEY='/root/.ssh/id_rsa' \
  -e GERRIT_PUBLIC_KEYS_PATH='/home/gerrit/ssh-keys' \
- -e GERRIT_USER_PUBLIC_KEY_PREFIX='id_' \
- -e GERRIT_USER_PUBLIC_KEY_SUFFIX='_rsa.pub' \
+ -e GERRIT_USER_PUBLIC_KEY_PREFIX='id-' \
+ -e GERRIT_USER_PUBLIC_KEY_SUFFIX='-rsa.pub' \
  -e AUTH_TYPE='DEVELOPMENT_BECOME_ANY_ACCOUNT' \
  -v $ADMIN_KEY:/root/.ssh \
  -v $KEYS_DIR:/home/gerrit/ssh-keys \
