@@ -2,8 +2,8 @@
 
 PROJECT_DIR=`pwd`
 
-USER=${1:-cmoulliard} # Username to be used to create the image
-GERRIT_TEMP_DIR=${2:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
+USER=${2:-cmoulliard} # Username to be used to create the image
+GERRIT_TEMP_DIR=${3:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
 KEYS_DIR=$PROJECT_DIR/ssh-keys
 ADMIN_KEY=$PROJECT_DIR/ssh-admin-key
 

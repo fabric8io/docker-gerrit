@@ -2,8 +2,8 @@
 
 PROJECT_DIR=`pwd`
 
-USER=${1:-cmoulliard} # Username to be used to create the image
-GERRIT_TEMP_DIR=${2:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
+USER=${2:-cmoulliard} # Username to be used to create the image
+GERRIT_TEMP_DIR=${3:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
 KEYS_DIR=$PROJECT_DIR/ssh-keys
 ADMIN_KEY=$PROJECT_DIR/ssh-admin-key
 
@@ -40,7 +40,7 @@ docker run -d -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -v $GERRIT_TEMP_DIR:/home/gerrit/site \
  --name gerrit \
  $USER/gerrit
- 
+
 docker exec -it gerrit bash
 
 # -v $KEYS_DIR/id_rsa.pub:/root/.ssh/id_rsa.pub \
