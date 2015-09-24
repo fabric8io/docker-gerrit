@@ -1,8 +1,5 @@
 #!/bin/bash
 
-export GERRIT_SSH_PATH=/Users/chmoulli/Fuse/Fuse-projects/fabric8/docker-gerrit/ssh-admin-key
-export GERRIT_SSH_KEYS=/Users/chmoulli/Fuse/Fuse-projects/fabric8/docker-gerrit/ssh-keys
-
 rm -rf ssh-admin-key
 rm -rf ssh-keys
 
