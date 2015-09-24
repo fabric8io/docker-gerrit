@@ -2,18 +2,16 @@
 
 PROJECT_DIR=`pwd`
 
-DOCKER_HOST=${1:-172.28.128.4}
-USER=${2:-cmoulliard} # Username to be used to create the image
-GERRIT_TEMP_DIR=${3:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
+USER=${1:-cmoulliard} # Username to be used to create the image
+GERRIT_TEMP_DIR=${2:-~/temp/gerrit-site} # Temp dir where we will mount the volume locally
 KEYS_DIR=$PROJECT_DIR/ssh-keys
 ADMIN_KEY=$PROJECT_DIR/ssh-admin-key
+
+. ./scripts/set_docker_env.sh
 
 docker stop gerrit
 docker rm gerrit
 rm -rf $GERRIT_TEMP_DIR
-
-export DOCKER_HOST=tcp://$DOCKER_HOST:2375
-export DOCKER_TLS_VERIFY=
 
 docker build -t $USER/gerrit .
 
@@ -31,7 +29,7 @@ docker run -it -p 0.0.0.0:8080:8080 -p 0.0.0.0:29418:29418 \
  -e GERRIT_ADMIN_FULLNAME='Administrator' \
  -e GERRIT_ADMIN_PWD='mysecret' \
  -e GERRIT_ACCOUNTS='jenkins,jenkins,jenkins@fabric8.io,secret,Non-Interactive Users:Administrators;sonar,sonar,sonar@fabric8.io,secret,Non-Interactive Users' \
- -e GERRIT_SSH_PATH='/home/gerrit/ssh-keys' \
+ -e GERRIT_SSH_PATH='/root/.ssh' \
  -e GERRIT_ADMIN_PRIVATE_KEY='/root/.ssh/id_rsa' \
  -e GERRIT_PUBLIC_KEYS_PATH='/home/gerrit/ssh-keys' \
  -e GERRIT_USER_PUBLIC_KEY_PREFIX='id_' \
