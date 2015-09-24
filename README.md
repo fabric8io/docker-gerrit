@@ -180,10 +180,10 @@ The script accepts 2 parameters : username, localation of the gerrit_site on you
 ./scripts/daemon-gerrit.sh HOSTNAME_IPADDRESS_DOCKER:PORT cmoulliard /home/temp/gerrit-site
 ```
 
-When the server is started, you can test the connection with the http server `http://192.168.59.103:8080` or using ssh
+When the server is started, you can test the connection with the http server `http://http://192.168.99.100/:8080` or using ssh
 
 ```
-ssh -i /Users/chmoulli/Fuse/Fuse-projects/fabric8/docker-gerrit/ssh-keys/id_rsa -p 2948 admin@192.168.59.103
+ssh -i /Users/chmoulli/Fuse/Fuse-projects/fabric8/docker-gerrit/ssh-keys/id-admin-rsa -p 29418 admin@192.168.99.100
 ```
 
 The IP address could be different depending where your docker server is running (boot2docker, ...)
