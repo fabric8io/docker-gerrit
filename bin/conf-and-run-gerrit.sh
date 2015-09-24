@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -10,7 +10,7 @@ FILES='/root/.ssh/*'
 for f in $FILES; do
    file=$(basename $f)
    DIR=$(dirname $f)
-   if [[  "$file" =~ ^ssh-key* ]]; then
+   if [ "$file" =~ ^ssh-key* ]; then
       new=$(echo $file | sed -e 's/ssh-key/id_rsa/')
       sudo mv "$DIR/$file" "$DIR/$new"
    fi
