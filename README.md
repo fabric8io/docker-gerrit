@@ -176,7 +176,8 @@ To build the image and test it, open a terminal under the project cloned or down
 The script accepts 2 parameters : username, localation of the gerrit_site on your local machine and the IP Address:PORT of the Docker Host
 
 ```
-./scripts/daemon-gerrit.sh cmoulliard /home/temp/gerrit-site HOSTNAME_IPADDRESS_DOCKER:PORT
+./scripts/generate-keys.sh
+./scripts/daemon-gerrit.sh HOSTNAME_IPADDRESS_DOCKER:PORT cmoulliard /home/temp/gerrit-site
 ```
 
 When the server is started, you can test the connection with the http server `http://192.168.59.103:8080` or using ssh
