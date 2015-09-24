@@ -14,7 +14,7 @@ for f in $GERRIT_SSH_PATH/*; do
 
    if [ "$new" = "id_rsa.pub" ]; then
       echo $DIR/$new
-      cp $DIR/$new $GERRIT_SSH_KEYS/id-admin-rsa.pub
+      cp $DIR/$new $GERRIT_PUBLIC_KEYS_PATH/id-admin-rsa.pub
    fi
 done
 
@@ -34,8 +34,8 @@ else
   cp ${GERRIT_HOME}/plugins/*.jar ${GERRIT_SITE}/plugins
 
   # Copy our config files
-  cp configs/gerrit.config ${GERRIT_SITE}/etc/gerrit.config
-  cp configs/replication.config ${GERRIT_SITE}/etc/replication.config
+  cp ${GERRIT_HOME}/configs/gerrit.config ${GERRIT_SITE}/etc/gerrit.config
+  cp ${GERRIT_HOME}/configs/replication.config ${GERRIT_SITE}/etc/replication.config
   
   # Configure Git Replication
   echo ">> Configure Git Replication & replace variables : GIT_SERVER_IP, GIT_SERVER_PORT, GIT_SERVER_USER, GIT_SERVER_PASSWORD & GIT_SERVER_PROJ_ROOT"
