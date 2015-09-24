@@ -2,17 +2,19 @@
 
 set -e
 
-# Rename keys imported within the root directory
-# Replace "-" char with "_" char
-# This step is required as gerrit, when the admin user is created, at the startup of the gerrit server, will
-# import the key using this path ${home_dir}/.ssh/id_rsa
+# Rename keys imported within the root directory from ssh-key to id_rsa
+# This step is required as gerrit, when the admin user is created during the generation site process will import the key using this path ${home_dir}/.ssh/id_rsa
+# Copy the root public key ssh-key.pub renamed into id_rsa.pub to the SSH-KEYS dir under the name id-admin-rsa.pub to allow the admin user to use this key for SSH connections (git, ...)
 for f in $GERRIT_SSH_PATH/*; do
    echo $f
    file=$(basename $f)
    DIR=$(dirname $f)
-   if [[ "$file" =~ ^ssh-key* ]]; then
-      new=$(echo $file | sed -e 's/ssh-key/id_rsa/')
-      sudo mv "$DIR/$file" "$DIR/$new"
+   new=$(echo $file | sed -e 's/ssh-key/id_rsa/')
+   mv "$DIR/$file" "$DIR/$new"
+
+   if [ "$new" = "id_rsa.pub" ]; then
+      echo $DIR/$new
+      cp $DIR/$new $GERRIT_SSH_KEYS/id-admin-rsa.pub
    fi
 done
 
