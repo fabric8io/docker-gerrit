@@ -15,7 +15,6 @@ cd ssh-keys/
 
 ssh-keygen -b 4096 -t rsa -f id-jenkins-rsa -q -N "" -C "jenkins@fabric8.io"
 ssh-keygen -b 4096 -t rsa -f id-sonar-rsa -q -N "" -C "sonar@fabric8.io"
-cp ../ssh-admin-key/ssh-key.pub id-admin-rsa.pub
 
 cd ..
 
