@@ -19,8 +19,8 @@ for f in $GERRIT_SSH_PATH/*; do
 done
 
 # lets make sure that the ssh keys have their permissions setup correctly
-chmod 700 /root/.ssh
-chmod 400 /root/.ssh/*
+# chmod 700 /root/.ssh
+# chmod 400 /root/.ssh/*
 
 # Initialize gerrit & reindex the site if the gerrit-configured doesn't exist
 if [ -f $GERRIT_SITE/.gerrit-configured ]; then
@@ -28,7 +28,7 @@ if [ -f $GERRIT_SITE/.gerrit-configured ]; then
 else
   echo ">> .gerrit-configured doesn't exist. We will start gerrit to generate it"
   java -jar ${GERRIT_HOME}/$GERRIT_WAR init --install-plugin=replication --install-plugin=download-commands --batch --no-auto-start -d ${GERRIT_SITE}
-  java -jar ${GERRIT_HOME}/$GERRIT_WAR reindex -d ${GERRIT_HOME}/site
+  # java -jar ${GERRIT_HOME}/$GERRIT_WAR reindex -d ${GERRIT_HOME}/site
 
   # Copy plugins including : add-user-plugin, delete-project
   cp ${GERRIT_HOME}/plugins/*.jar ${GERRIT_SITE}/plugins
