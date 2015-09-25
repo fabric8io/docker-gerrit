@@ -188,3 +188,17 @@ ssh -i /Users/chmoulli/Fuse/Fuse-projects/fabric8/docker-gerrit/ssh-keys/id-admi
 
 The IP address could be different depending where your docker server is running (boot2docker, ...)
 
+### Test with REST API
+
+```
+http --auth admin:secret http://192.168.59.103:8080/projects/
+http --auth-type digest -a admin:secret PUT http://192.168.59.103:8080/a/projects/MyProject < my-project.json
+
+where my-project.json is 
+
+{
+  "description": "This is a demo project.",
+  "submit_type": "CHERRY_PICK"
+}
+```
+
