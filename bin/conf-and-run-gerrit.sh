@@ -10,12 +10,7 @@ for f in $GERRIT_SSH_PATH/*; do
    file=$(basename $f)
    DIR=$(dirname $f)
    new=$(echo $file | sed -e 's/ssh-key/id_rsa/')
-  
-   if [ -f "$DIR/$new" ]; then
-       rm -f $DIR/$new && mv "$DIR/$file" "$DIR/$new"
-   else
-       mv "$DIR/$file" "$DIR/$new"
-   fi
+   cmp --silent $old $new || mv "$DIR/$file" "$DIR/$new"
 
    if [ "$new" = "id_rsa.pub" ]; then
       echo $DIR/$new
