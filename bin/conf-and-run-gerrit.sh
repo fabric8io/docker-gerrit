@@ -14,7 +14,7 @@ for f in $GERRIT_SSH_PATH/*; do
    if [ "$DIR/$file" != "$DIR/$new" ]; then
        mv "$DIR/$file" "$DIR/$new"
    else
-      echo "id files identical"
+      echo "$f files identical"
    fi
 
    if [ "$new" = "id_rsa.pub" ]; then
