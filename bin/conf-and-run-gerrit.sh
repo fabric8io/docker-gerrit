@@ -11,7 +11,7 @@ for f in $GERRIT_SSH_PATH/*; do
    DIR=$(dirname $f)
    new=$(echo $file | sed -e 's/ssh-key/id_rsa/')
  
-   if [ "$DIR/$file" != "$DIR/$new"]; then
+   if [ "$DIR/$file" != "$DIR/$new" ]; then
        mv "$DIR/$file" "$DIR/$new"
    else
       echo "id files identical"
